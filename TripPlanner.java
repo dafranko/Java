@@ -8,8 +8,10 @@ public class TripPlanner{
 		TravelBudget();
 		System.out.println();
 		TimeDifference();
-
+		System.out.println();
+		CountryArea();
 	}
+
 	//greet the user, get name and destination
 	public static void Greetings(){
 		Scanner input = new Scanner(System.in);
@@ -62,6 +64,7 @@ public class TripPlanner{
 		System.out.println("If you are travelling for "+days+" days that is the same as "+hours+" hours or "+minutes+" minutes");
 		System.out.println("If you are going to spend $"+money+" USD that means per day you can spend up to $"+moneyPerDayUS+" USD");
 		System.out.println("Your total budget in "+currency+" is "+moneyInTotal+" "+currency+", which per day is "+moneyPerDayDest+" "+currency);
+		System.out.println("************");
 	}
 
 	//tells user the time difference
@@ -94,10 +97,26 @@ public class TripPlanner{
 			System.out.println("That means when it is midnight at home it will be "+hourDiff1+":00 in your travel destination and when it is noon at home it will be "+hourDiff2+":00");
 		}
 
+		System.out.println("************");
 	}
 
+	//tell user destination size in miles2
+	public static void CountryArea(){
+		Scanner input = new Scanner(System.in);
+		System.out.print("What is the square area of your destination in km2? ");
+		int areaKm = input.nextInt(); //user input
 
+		double conversion = 2.59; //conversion var for km to mi
 
+		double areaMi = areaKm / conversion; //holds miles2
 
+		//round to two decimals
+		areaMi = areaMi * 100;
+		areaMi = (int) areaMi;
+		areaMi = (double) areaMi;
+		areaMi = areaMi / 100.0;
 
+		System.out.println("In miles2 that is "+areaMi);
+		System.out.println("************");
+	}
 }
