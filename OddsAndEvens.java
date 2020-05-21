@@ -2,13 +2,13 @@ import java.util.*;
 
 public class OddsAndEvens{
 	public static void main(String[] args){
-		Pick();
+		Game();
 	}
 
-	//greet user and user's pick of even or odd
-	public static void Pick(){
+	//method has the entire game
+	public static void Game(){
 		Scanner input = new Scanner(System.in);
-		System.out.println("Lets play a game called \"Odds and Evens\"");
+		System.out.println("Let's play a game called \"Odds and Evens\"");
 		System.out.print("What is your name? ");
 		String name = input.next(); //get user's name
 		System.out.print("Hi "+name+", which fo you choose? (O)dds or (E)vens ");
@@ -26,5 +26,9 @@ public class OddsAndEvens{
 		if(choice.equals("E")){
 			System.out.println(name+" has picked evens! The computer will be odds.");
 		}
+
+		System.out.println("---------------------------------------");
+
+
 	}
 }
