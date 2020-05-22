@@ -2,8 +2,9 @@ import java.util.*;
 
 public class Crypto{
 	public static void main(String[] args){
-		String crypt = normalizeText("This is \"the end\" of the) (world!?");
+		String crypt = normalizeText("Hippies!");
 		String ceasar = ceasarify(crypt , 1);
+		System.out.println(crypt);
 		System.out.println(ceasar);
 	}
 
@@ -42,8 +43,17 @@ public class Crypto{
 	}
 
 	public static String ceasarify(String text, int key){
-		String alpha = shiftAlphabet(key);
-		return alpha;
+		String ceasar = ""; //encrypted text
+		String alpha = shiftAlphabet(key); //alphabet shifted by key
+
+		for(int j = 0; j < text.length(); j++){
+			int index = j + 1;
+			String str = text.substring(j,index);
+			//get index value of str from alpha
+			//add index value to get the ceasar equivalent
+			System.out.println(str);
+		}
+		return ceasar;
 	} 
 
 	public static String shiftAlphabet(int shift) {
