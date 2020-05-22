@@ -2,14 +2,67 @@ import java.util.*;
 
 public class Crypto{
 	public static void main(String[] args){
-
+		String crypt = normalizeText("This is \"the end\" of the) (world!?");
+		String ceasar = ceasarify(crypt , 1);
+		System.out.println(ceasar);
 	}
 
 	public static String normalizeText(String text){
-		Scanner input = new Scanner(System.in);
-		for(int i = 0; i <= text.length(); i++){
+		text = text.replace(" ", "");
+		text = text.toUpperCase();
 
+		if(text.contains(")")){
+			text = text.replace(")","");
 		}
-		return text;
+		if(text.contains("(")){
+			text = text.replace("(","");
+		}
+		if(text.contains("!")){
+			text = text.replace("!","");
+		}
+		if(text.contains("?")){
+			text = text.replace("?","");
+		}
+		if(text.contains("\"")){
+			text = text.replace("\"","");
+		}
+		if(text.contains(";")){
+			text = text.replace(";","");
+		}
+		if(text.contains(":")){
+			text = text.replace(":","");
+		}
+		if(text.contains(",")){
+			text = text.replace(",","");
+		}
+		if(text.contains(".")){
+			text = text.replace(".","");
+		}
+		return text; 
 	}
+
+	public static String ceasarify(String text, int key){
+		String alpha = shiftAlphabet(key);
+		return alpha;
+	} 
+
+	public static String shiftAlphabet(int shift) {
+    int start = 0;
+    if (shift < 0) {
+        start = (int) 'Z' + shift + 1;
+    } else {
+        start = 'A' + shift;
+    }
+    String result = "";
+    char currChar = (char) start;
+    for(; currChar <= 'Z'; ++currChar) {
+        result = result + currChar;
+    }
+    if(result.length() < 26) {
+        for(currChar = 'A'; result.length() < 26; ++currChar) {
+            result = result + currChar;
+        }
+    }
+    return result;
+}
 }
