@@ -3,10 +3,10 @@ import java.util.*;
 public class Crypto{
 	public static void main(String[] args){
 
-		String encrypText = encryptString("WHippies asdfsgjkjytredWYZ", 6, 2);
+		String encrypText = encryptString("Ceasar shift huh, that's pretty old crypto stuff", 4, 3);
 		System.out.println(encrypText);
-		/*String ungroup = ungroupify(encrypText);
-		System.out.println(ungroup);*/
+		String decryptText = decryptString(encrypText, 4);
+		System.out.println(decryptText);
 	}
 
 	//nomralize the text
@@ -41,6 +41,9 @@ public class Crypto{
 		if(text.contains(".")){
 			text = text.replace(".","");
 		}
+		if(text.contains("'")){
+			text = text.replace("'","");
+		}
 		return text; 
 	}
 
@@ -51,32 +54,31 @@ public class Crypto{
 
 		for(int j = 0; j < text.length(); j++){
 			int index = j + 1; //to get single char in string
-			String str = text.substring(j,index); //the char in string
+			String str = text.substring(j, index); //the char in string
 			int strVal = alpha.indexOf(str); //get index value of str from alpha
 			String temp = ""; //to temporarly store char of string
 
-			int remain0 = strVal + key;
-			int remain1 = 0;
+			int remain0 = strVal + key; //original remiander, figure where the ceasar char equivalent index is located
+			int remain1 = 0; //if remain0 is over 25 or under 0, calculate true ceasar index value
 
-			if(remain0 > 25){
-				remain1 = remain0 % 25;
-				temp = alpha.substring(remain1,remain1 + 1);
+			if(remain0 > 25){ //if oringinal remainder is over 25
+				remain1 = remain0 % 26; //wraps around the end alphabet to get true ceasar index value
+				temp = alpha.substring(remain1,remain1 + 1); //get true ceasar index value
 			}
-			if(remain0 < 0){
-				remain1 = (((remain0 % 26) + 26) % 26);
-				remain1 = 26 + remain0;
-				temp = alpha.substring(remain1,remain1 + 1); //add index value to get the ceasar char equivalent
+			if(remain0 < 0){ //if original reimaonder is under 0
+				remain1 = (((remain0 % 26) + 26) % 26); //get mod of negative value, online source
+				remain1 = 26 + remain0; //add 26 to wrap around the front of alphabet
+				temp = alpha.substring(remain1,remain1 + 1); //get true ceasar index value
 			}
-			if((remain0 < 25) && (remain0 > 0)){
-				temp = alpha.substring(remain0,remain0+1);
+			if((remain0 < 25) && (remain0 > 0)){ //if remainder is within the alphabet length 
+				temp = alpha.substring(remain0,remain0+1); //get true ceasar index value
 			}
-			if(remain0 == 25){ 
-				temp = alpha.substring(25);
-			}else if(remain0 == 0){
-				temp = alpha.substring(0,1);
+			if(remain0 == 25){ //if remainder is equal to last index of alphabet
+				temp = alpha.substring(25); //get last char of alphabet
+			}else if(remain0 == 0){ //if remainder is equal to first index of alphabet
+				temp = alpha.substring(0,1); //get first char of alphabet
 			}
-
-			ceasar = ceasar + temp; //add ceasar equivalent to final return string 
+			ceasar = ceasar + temp; //add ceasar char equivalent to final return string 
 		}
 		return ceasar;
 	}	 
@@ -150,6 +152,51 @@ public class Crypto{
 			index0 = index1;
 		}
 		return ungroup;
+	}
+
+	public static String decryptString(String text, int key){
+		String ungroupText = ungroupify(text);
+		//WHippies asdfsgjkjytredWYZ
+
+		String ceasar = ""; //encrypted text
+		String alpha = shiftAlphabet(key); //alphabet shifted by key
+		//System.out.println(alpha);
+
+		for(int j = 0; j < ungroupText.length(); j++){
+			int index = j + 1; //to get single char in string
+			String str = ungroupText.substring(j, index); //the char in string
+			int strVal = alpha.indexOf(str); //get index value of str from alpha
+			//System.out.println(str+" org");
+			//System.out.println(strVal+" org index");
+			String temp = ""; //to temporarly store char of string
+
+			int remain0 = strVal - key; //original remiander, figure where the ceasar char equivalent index is located
+			//System.out.println(remain0+" remain");
+			int remain1 = 0; //if remain0 is over 25 or under 0, calculate true ceasar index value
+
+			if(remain0 > 25){ //if oringinal remainder is over 25
+				remain1 = remain0 % 26; //wraps around the end alphabet to get true ceasar index value
+				temp = alpha.substring(remain1,remain1 + 1); //get true ceasar index value
+			}
+			if(remain0 < 0){ //if original reimaonder is under 0
+				remain1 = (((remain0 % 26) + 26) % 26); //get mod of negative value, online source
+				remain1 = 26 + remain0; //add 26 to wrap around the front of alphabet
+				temp = alpha.substring(remain1,remain1 + 1); //get true ceasar index value
+			}
+			if((remain0 < 25) && (remain0 > 0)){ //if remainder is within the alphabet length 
+				temp = alpha.substring(remain0,remain0+1); //get true ceasar index value
+			}
+			if(remain0 == 25){ //if remainder is equal to last index of alphabet
+				temp = alpha.substring(25); //get last char of alphabet
+			}else if(remain0 == 0){ //if remainder is equal to first index of alphabet
+				temp = alpha.substring(0,1); //get first char of alphabet
+			}
+			//System.out.println(temp);
+			//System.out.println("----------------------------------------------------------");
+			ceasar = ceasar + temp; //add ceasar char equivalent to final return string 
+		}
+		return ceasar;
+
 	}
 
 }
