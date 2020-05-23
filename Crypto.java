@@ -3,7 +3,7 @@ import java.util.*;
 public class Crypto{
 	public static void main(String[] args){
 
-		String encrypText = encryptString("WHippies aredWYZ", 6, 2);
+		String encrypText = encryptString("WHippies asdfsgjkjytredWYZ", 6, 2);
 		System.out.println(encrypText);
 		/*String ungroup = ungroupify(encrypText);
 		System.out.println(ungroup);*/
@@ -47,9 +47,7 @@ public class Crypto{
 	//shift the text by the key value
 	public static String ceasarify(String text, int key){
 		String ceasar = ""; //encrypted text
-		System.out.println(text.length());
 		String alpha = shiftAlphabet(key); //alphabet shifted by key
-		//"WHippies! aredWYZ"
 
 		for(int j = 0; j < text.length(); j++){
 			int index = j + 1; //to get single char in string
@@ -60,19 +58,13 @@ public class Crypto{
 			int remain0 = strVal + key;
 			int remain1 = 0;
 
-			System.out.println(strVal);
-			System.out.println(remain0+" test outer");
 			if(remain0 > 25){
 				remain1 = remain0 % 25;
-				System.out.println(remain1+" test over 25");
-				System.out.println(strVal);
 				temp = alpha.substring(remain1,remain1 + 1);
 			}
 			if(remain0 < 0){
 				remain1 = (((remain0 % 26) + 26) % 26);
 				remain1 = 26 + remain0;
-				System.out.println("----------------------------------");
-				System.out.println(remain1+" test under 25");
 				temp = alpha.substring(remain1,remain1 + 1); //add index value to get the ceasar char equivalent
 			}
 			if((remain0 < 25) && (remain0 > 0)){
@@ -80,14 +72,12 @@ public class Crypto{
 			}
 			if(remain0 == 25){ 
 				temp = alpha.substring(25);
-				System.out.println("0000000000000000000000000000000000000000");
 			}else if(remain0 == 0){
 				temp = alpha.substring(0,1);
 			}
 
 			ceasar = ceasar + temp; //add ceasar equivalent to final return string 
 		}
-		System.out.println(ceasar + "ceasar");
 		return ceasar;
 	}	 
 
@@ -109,7 +99,6 @@ public class Crypto{
             	result = result + currChar;
         	}
     	}
-    	System.out.println(result);
     	return result;
 	}
 
