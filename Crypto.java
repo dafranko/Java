@@ -2,11 +2,9 @@ import java.util.*;
 
 public class Crypto{
 	public static void main(String[] args){
-		String crypt = normalizeText("Hippies!");
-		String ceasar = ceasarify(crypt , 2);
-		String grouped = groupify(ceasar, 2);
-		System.out.println(crypt);
-		System.out.println(ceasar);
+
+		String encrypText = encryptString("Hippies!", 2, 6);
+		System.out.println(encrypText);
 	}
 
 	//nomralize the text
@@ -83,6 +81,34 @@ public class Crypto{
 
 	//group the text letters by the group value 
 	public static String groupify(String text, int group){
+		String groupText = ""; //final string to return, grouped and padded if needed
+		int index0 = 0, index1 = 0; //for substring
+		int count = 0; //for iteration, to keep while loop balanced
 
+		boolean flag = text.length() % group == 0; //for padding
+
+		while(!flag){
+			text = text + 'x'; //pad text with x to group 
+			flag = text.length() % group == 0; //if padding is done
+		}
+		
+		while((groupText.length() - count) != text.length()){
+			String temp = ""; //holds the group string
+			index1 = index1 + group; //holds the index value of the last char of group
+			temp = text.substring(index0,index1); //from index0 to index 1, get string
+			index0 = index1; //update the staring index value
+			groupText = groupText + temp + " " ; //seperate the groups
+			count ++; //for every " " we add to the groupText length, used to subtract " " char from length
+		}	
+		return groupText;
 	}
+
+	public static String encryptString(String text, int key, int group){
+		String normalText = normalizeText(text);
+		String ceasarText = ceasarify(normalText, key);
+		String groupText = groupify(ceasarText, group);
+
+		return groupText;
+	}
+
 }
