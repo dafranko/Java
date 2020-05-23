@@ -3,7 +3,7 @@ import java.util.*;
 public class Crypto{
 	public static void main(String[] args){
 
-		String encrypText = encryptString("WHippies! are", -4, 3);
+		String encrypText = encryptString("WHippies aredWYZ", 6, 2);
 		System.out.println(encrypText);
 		/*String ungroup = ungroupify(encrypText);
 		System.out.println(ungroup);*/
@@ -49,27 +49,40 @@ public class Crypto{
 		String ceasar = ""; //encrypted text
 		System.out.println(text.length());
 		String alpha = shiftAlphabet(key); //alphabet shifted by key
+		//"WHippies! aredWYZ"
 
 		for(int j = 0; j < text.length(); j++){
 			int index = j + 1; //to get single char in string
 			String str = text.substring(j,index); //the char in string
 			int strVal = alpha.indexOf(str); //get index value of str from alpha
-			String temp = ""; //to temporarly store char of string 
+			String temp = ""; //to temporarly store char of string
 
-			int remaind = strVal % 26;
-			System.out.println(remaind);
-			if((remaind + key) > 25){
-				remaind = strVal % 26;
-				remaind = remaind + key;
-				System.out.println(remaind);
-				temp = alpha.substring(0,remaind);
-			}else if((remaind + key) < 0){
-				remaind = (26 - (Math.abs(strVal) % 26) ) % 26;
+			int remain0 = strVal + key;
+			int remain1 = 0;
+
+			System.out.println(strVal);
+			System.out.println(remain0+" test outer");
+			if(remain0 > 25){
+				remain1 = remain0 % 25;
+				System.out.println(remain1+" test over 25");
+				System.out.println(strVal);
+				temp = alpha.substring(remain1,remain1 + 1);
+			}
+			if(remain0 < 0){
+				remain1 = (((remain0 % 26) + 26) % 26);
+				remain1 = 26 + remain0;
 				System.out.println("----------------------------------");
-				System.out.println(remaind);
-				temp = alpha.substring(remaind,remaind + 1); //add index value to get the ceasar char equivalent
-			}else{
-				temp = alpha.substring(strVal+key,strVal+key+1);
+				System.out.println(remain1+" test under 25");
+				temp = alpha.substring(remain1,remain1 + 1); //add index value to get the ceasar char equivalent
+			}
+			if((remain0 < 25) && (remain0 > 0)){
+				temp = alpha.substring(remain0,remain0+1);
+			}
+			if(remain0 == 25){ 
+				temp = alpha.substring(25);
+				System.out.println("0000000000000000000000000000000000000000");
+			}else if(remain0 == 0){
+				temp = alpha.substring(0,1);
 			}
 
 			ceasar = ceasar + temp; //add ceasar equivalent to final return string 
