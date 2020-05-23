@@ -196,7 +196,5 @@ public class Crypto{
 			ceasar = ceasar + temp; //add ceasar char equivalent to final return string 
 		}
 		return ceasar;
-
 	}
-
 }
