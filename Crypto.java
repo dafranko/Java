@@ -3,8 +3,10 @@ import java.util.*;
 public class Crypto{
 	public static void main(String[] args){
 
-		String encrypText = encryptString("Hippies!", 2, 6);
+		String encrypText = encryptString("WHippies! are", -4, 3);
 		System.out.println(encrypText);
+		/*String ungroup = ungroupify(encrypText);
+		System.out.println(ungroup);*/
 	}
 
 	//nomralize the text
@@ -45,18 +47,36 @@ public class Crypto{
 	//shift the text by the key value
 	public static String ceasarify(String text, int key){
 		String ceasar = ""; //encrypted text
+		System.out.println(text.length());
 		String alpha = shiftAlphabet(key); //alphabet shifted by key
 
 		for(int j = 0; j < text.length(); j++){
 			int index = j + 1; //to get single char in string
 			String str = text.substring(j,index); //the char in string
 			int strVal = alpha.indexOf(str); //get index value of str from alpha
-			String temp = ""; //to temporarly store char of string
-			temp = alpha.substring(strVal+key,strVal+key+1); //add index value to get the ceasar char equivalent
+			String temp = ""; //to temporarly store char of string 
+
+			int remaind = strVal % 26;
+			System.out.println(remaind);
+			if((remaind + key) > 25){
+				remaind = strVal % 26;
+				remaind = remaind + key;
+				System.out.println(remaind);
+				temp = alpha.substring(0,remaind);
+			}else if((remaind + key) < 0){
+				remaind = (26 - (Math.abs(strVal) % 26) ) % 26;
+				System.out.println("----------------------------------");
+				System.out.println(remaind);
+				temp = alpha.substring(remaind,remaind + 1); //add index value to get the ceasar char equivalent
+			}else{
+				temp = alpha.substring(strVal+key,strVal+key+1);
+			}
+
 			ceasar = ceasar + temp; //add ceasar equivalent to final return string 
 		}
+		System.out.println(ceasar + "ceasar");
 		return ceasar;
-	} 
+	}	 
 
 	//alphabet that is shifted by shift value, provided by edX course
 	public static String shiftAlphabet(int shift) {
@@ -76,6 +96,7 @@ public class Crypto{
             	result = result + currChar;
         	}
     	}
+    	System.out.println(result);
     	return result;
 	}
 
@@ -109,6 +130,24 @@ public class Crypto{
 		String groupText = groupify(ceasarText, group);
 
 		return groupText;
+	}
+
+	public static String ungroupify(String text){
+		String ungroup = text; //text that is ungrouped
+		ungroup = ungroup.replace(" ", "");
+
+		int index0 = 0, index1 = 0;
+
+		for(int j = 0; j < ungroup.length(); j++){
+			index1 = index0 + 1;
+			String ch = ungroup.substring(index0,index1);
+			boolean flag = ch.equals("x");
+			if(flag){
+				ungroup = ungroup.replace(ch, "");
+			}
+			index0 = index1;
+		}
+		return ungroup;
 	}
 
 }
