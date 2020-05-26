@@ -18,6 +18,7 @@ public class MazeRunner{
 	public static String userMove(){
 		Scanner input = new Scanner(System.in);
 		String dir = "";
+		String pit = "";
 		//might need a big while loop here
 		while(!(myMap.didIWin())){
 			System.out.print("Where will you like to move? (R, L, U, D) ");
@@ -36,9 +37,19 @@ public class MazeRunner{
 					if(myMap.canIMoveRight()){
 						myMap.moveRight();
 						myMap.printMap();
+					}else if(myMap.isThereAPit("R")){
+						System.out.println("Watch out! There is a pit. Jump? ");
+						pit = input.next();
+						if(pit.equalsIgnoreCase("Y")){
+							myMap.jumpOverPit("R");
+							myMap.printMap();	
+						}
+						else{
+							System.out.println("Not jumping ");
+						}
 					}
 					else{
-						 System.out.println("Error! Hit a wall");
+						System.out.println("Error! Hit a wall");
 					}
 					break;
 
@@ -46,6 +57,17 @@ public class MazeRunner{
 					if(myMap.canIMoveLeft()){
 						myMap.moveLeft();
 						myMap.printMap();
+					}
+					else if(myMap.isThereAPit("L")){
+						System.out.println("Watch out! There is a pit. Jump? ");
+						pit = input.next();
+						if(pit.equalsIgnoreCase("Y")){
+							myMap.jumpOverPit("L");
+							myMap.printMap();
+						}
+						else{
+							System.out.println("Not jumping ");
+						}
 					}
 					else{
 						 System.out.println("Error! Hit a wall");
@@ -56,7 +78,17 @@ public class MazeRunner{
 					if(myMap.canIMoveUp()){
 						myMap.moveUp();
 						myMap.printMap();
-					}
+					}else if(myMap.isThereAPit("U")){
+						System.out.println("Watch out! There is a pit. Jump? ");
+						pit = input.next();
+						if(pit.equalsIgnoreCase("Y")){
+							myMap.jumpOverPit("U");
+							myMap.printMap();
+						}
+						else{
+							System.out.println("Not jumping ");
+						}
+											}
 					else{
 						 System.out.println("Error! Hit a wall");
 					}
@@ -66,6 +98,17 @@ public class MazeRunner{
 					if(myMap.canIMoveDown()){
 						myMap.moveDown();
 						myMap.printMap();
+					}
+					else if(myMap.isThereAPit("D")){
+						System.out.println("Watch out! There is a pit. Jump? ");
+						pit = input.next();
+						if(pit.equalsIgnoreCase("Y")){
+							myMap.jumpOverPit("D");
+							myMap.printMap();
+						}
+						else{
+							System.out.println("Not jumping ");
+						}
 					}
 					else{
 						 System.out.println("Error! Hit a wall");
