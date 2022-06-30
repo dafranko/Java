@@ -14,6 +14,8 @@ public class helloWorld{
 
 		System.out.println("Example one");
 
+		System.out.println("Adding edit from command line");
+
 		System.out.println((firstNum+secondNum*thirdNum)-1000);
 	}
 } 	
