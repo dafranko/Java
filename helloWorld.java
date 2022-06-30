@@ -18,6 +18,8 @@ public class helloWorld{
 
 		System.out.println("Example 2");
 
+		System.out.println("Example 3")
+
 		System.out.println((firstNum+secondNum*thirdNum)-1000);
 	}
 } 	
