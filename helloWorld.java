@@ -12,6 +12,8 @@ public class helloWorld{
 
 		System.out.println("Edit-1");
 
+		System.out.println("Example one");
+
 		System.out.println((firstNum+secondNum*thirdNum)-1000);
 	}
-}
+} 	
