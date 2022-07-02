@@ -20,6 +20,8 @@ public class helloWorld{
 
 		System.out.println("Example 3")
 
+		System.out.println("Hello World!")
+
 		System.out.println((firstNum+secondNum*thirdNum)-1000);
 	}
 } 	
